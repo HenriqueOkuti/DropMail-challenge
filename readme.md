@@ -15,9 +15,9 @@
     </ul>
     <li>Obligatory 3</li>
     <ul>
-        <li> - [] Notifications Button</li>
-        <li> - [] Notifications must be shown on the desktop</li>
-        <li> - [] Notifications should be toggled</li>
+        - [] Notifications Button<br/>
+        - [] Notifications must be shown on the desktop<br/>
+        - [] Notifications should be toggled<br/>
     </ul>
     <li>Obligatory 4</li>
     <ul>
