@@ -1,7 +1,9 @@
+import { HeaderDiv } from './HeaderStyles';
+
 export default function Header() {
   return (
     <>
-      <div>Header</div>
+      <HeaderDiv>DropMail</HeaderDiv>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { AllContentContainer } from './AppStyles';
 import Header from './components/header/Header';
 import Info from './components/info/Info';
 import MailContent from './components/mailContent/MailContent';
@@ -7,10 +8,10 @@ export default function App() {
     <>
       <div>
         <Header />
-        <div>
+        <AllContentContainer>
           <Info />
           <MailContent />
-        </div>
+        </AllContentContainer>
       </div>
     </>
   );
