@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 
 export const AllContentContainer = styled.div`
-  height: 80vh;
+  display: flex;
+  flex-direction: column;
 
-  border: 1px solid black;
+  height: 85vh;
+  min-height: 650px;
+  //width: 99vw;
+
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+
+  margin: 0 10px 20px 10px;
 `;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const HeaderDiv = styled.div`
   width: 185px;
-  height: 43px;
+  height: 45px;
 
   display: flex;
   align-items: center;
@@ -22,4 +22,6 @@ export const HeaderDiv = styled.div`
   margin: 15px 0 25px 10px;
 
   background: #b6b6b6;
+
+  border-radius: 5px;
 `;

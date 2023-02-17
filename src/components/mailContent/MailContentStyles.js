@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const MailContentContainer = styled.div`
   display: flex;
 
-  width: 98%;
-  margin: 0 1% 0 1%;
+  background-color: #f7f7f7;
+
+  width: 100%;
+  height: 100%;
 `;

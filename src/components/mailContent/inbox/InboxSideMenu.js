@@ -1,22 +1,42 @@
-export default function InboxSideMenu({ emails }) {
-  console.log(emails);
+import {
+  EmailContainer,
+  EmailsContainer,
+  EmailSender,
+  EmailSimplifiedText,
+  EmailTitle,
+  SideMenuContainer,
+  SideMenuHeader,
+} from './InboxSideMenuStyles';
 
+export default function InboxSideMenu({ emails }) {
   return (
     <>
-      <div>
-        <div>Inbox</div>
-        {emails.map((email, index) => (
-          <RenderEmailOption key={index} email={email} />
-        ))}
-      </div>
+      <SideMenuContainer>
+        <SideMenuHeader>
+          <p>Inbox</p>
+        </SideMenuHeader>
+        <EmailsContainer>
+          {emails[0] ? (
+            emails.map((email, index) => (
+              <RenderEmailOption key={index} email={email} />
+            ))
+          ) : (
+            <></>
+          )}
+        </EmailsContainer>
+      </SideMenuContainer>
     </>
   );
 }
 
 function RenderEmailOption({ email }) {
+  const simplifiedText = email.text.slice(0, 50);
+
   return (
-    <>
-      <div>Email</div>
-    </>
+    <EmailContainer onClick={() => console.log('selected e-mail')}>
+      <EmailSender>{email.fromAddr}</EmailSender>
+      <EmailTitle>{email.headerSubject}</EmailTitle>
+      <EmailSimplifiedText>{simplifiedText}</EmailSimplifiedText>
+    </EmailContainer>
   );
 }

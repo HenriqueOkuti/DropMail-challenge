@@ -1,9 +1,18 @@
+import {
+  BlankRow,
+  EmailBody,
+  EmailTitle,
+  InboxMailContainer,
+} from './InboxMailStyles';
+
 export default function InboxMail({ email }) {
   //console.log(email);
 
   return (
-    <>
-      <div>Inbox Mail Text</div>
-    </>
+    <InboxMailContainer>
+      <BlankRow />
+      <EmailTitle>Email Title</EmailTitle>
+      <EmailBody>Email Body</EmailBody>
+    </InboxMailContainer>
   );
 }

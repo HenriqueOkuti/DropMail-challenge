@@ -1,5 +1,6 @@
 import {
   AutoRefreshDiv,
+  AuxDiv,
   EmailField,
   IconDiv,
   InfoDiv,
@@ -38,7 +39,7 @@ export default function Info() {
 
   return (
     <InfoDiv>
-      <div>
+      <AuxDiv>
         <TempText>Your temporary email address</TempText>
         <InputDiv>
           <EmailField>{mockedData.email}</EmailField>
@@ -49,7 +50,7 @@ export default function Info() {
             <div>Copy</div>
           </InputDivButtom>
         </InputDiv>
-      </div>
+      </AuxDiv>
       <RefreshContainer>
         <AutoRefreshDiv>
           <p>Autorefresh in</p>

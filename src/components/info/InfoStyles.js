@@ -1,10 +1,25 @@
 import styled from 'styled-components';
 
 export const InfoDiv = styled.div`
-  margin-top: 25px;
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  border-bottom: 1px solid #dfdfdf;
+
+  max-height: 30%;
+  min-height: 200px;
+
+  min-width: 100%;
+
+  //padding-bottom: 45px;
+`;
+
+export const AuxDiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-width: 75%;
 `;
 
 export const TempText = styled.div`
@@ -16,15 +31,18 @@ export const TempText = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
 
   color: #aeb0b4;
+
+  margin-top: 25px;
 `;
 
 export const InputDiv = styled.div`
   display: flex;
   align-items: center;
 
-  width: 480px;
+  width: 100%;
   height: 40px;
 
   background: #ffffff;
@@ -38,7 +56,7 @@ export const EmailField = styled.div`
 
   width: 80%;
   height: 100%;
-  padding: 0 0 0 5%;
+  padding: 0 0 0 15px;
 
   line-break: anywhere;
 
