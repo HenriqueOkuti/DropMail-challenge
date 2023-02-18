@@ -17,32 +17,48 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useEffect, useState } from 'react';
-import { createSession } from '../../services/useDropMail';
+import { useContext, useEffect, useState } from 'react';
+import { SessionContext } from '../../contexts/sessionContext';
+import { refreshMailList } from '../../services/useDropMail';
+import { MailContext } from '../../contexts/mailContext';
 
 export default function Info() {
-  const [timer, setTimer] = useState(15);
+  const [update, setUpdate] = useState(false);
+  const [timer, setTimer] = useState(0);
+  const sessionInfo = useContext(SessionContext);
+  const currentEmail = JSON.parse(sessionInfo.session).address;
+  const { setMail } = useContext(MailContext);
 
   useEffect(() => {
-    if (timer <= 0) {
-      //createSession();
-      setTimer(15);
+    if (timer <= 0 || update) {
+      console.log('sending request');
+      refreshMailList(JSON.parse(sessionInfo.session).token, setMail).then(
+        () => {
+          setTimer(15);
+        }
+      );
+
+      if (update) {
+        setUpdate(!update);
+      }
     } else {
       const interval = setInterval(() => {
         setTimer((timer) => timer - 1);
-      }, 500);
+      }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [timer]);
+  }, [timer, update]);
+
+  //Change InputDivButtom to MUI equivalent
 
   return (
     <InfoDiv>
       <AuxDiv>
         <TempText>Your temporary email address</TempText>
         <InputDiv>
-          <EmailField>{mockedData.email}</EmailField>
-          <InputDivButtom>
+          <EmailField>{currentEmail}</EmailField>
+          <InputDivButtom onClick={() => copyToClipboard(currentEmail)}>
             <IconDiv>
               <MdContentCopy />
             </IconDiv>
@@ -84,7 +100,7 @@ export default function Info() {
             </Box>
           </IconDiv>
         </AutoRefreshDiv>
-        <ManualRefreshDiv>
+        <ManualRefreshDiv onClick={() => setUpdate(!update)}>
           <IconDiv>
             <HiOutlineRefresh />
           </IconDiv>
@@ -95,6 +111,8 @@ export default function Info() {
   );
 }
 
-const mockedData = {
-  email: 'email@mail.com',
-};
+function copyToClipboard(email) {
+  navigator.clipboard.writeText(email);
+
+  //trigger notification HERE
+}

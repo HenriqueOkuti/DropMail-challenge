@@ -6,16 +6,17 @@ import { createSession } from './services/useDropMail';
 import { useEffect, useState } from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { SessionProvider } from './contexts/sessionContext';
+import { MailProvider } from './contexts/mailContext';
 
 export default function App() {
   const queryClient = new QueryClient();
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [userInfo, setUserInfo] = useState(localStorage.getItem('userInfo'));
 
   useEffect(() => {
-    fetchSession(setToken);
+    fetchSession(setUserInfo);
   }, []);
 
-  if (!token) {
+  if (!userInfo) {
     return (
       <>
         <div>Loading App</div>
@@ -26,32 +27,40 @@ export default function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <SessionProvider>
-          <Header />
-          <AllContentContainer>
-            <Info />
-            <MailContent />
-          </AllContentContainer>
+          <MailProvider>
+            <Header />
+            <AllContentContainer>
+              <Info />
+              <MailContent />
+            </AllContentContainer>
+          </MailProvider>
         </SessionProvider>
       </QueryClientProvider>
     </>
   );
 }
 
-async function fetchSession(setToken) {
-  let token = localStorage.getItem('token');
+async function fetchSession(setUserInfo) {
+  let token = JSON.parse(localStorage.getItem('userInfo'))?.token;
   if (!token) {
     const response = await createSession();
     token = response.data.introduceSession.id;
-    localStorage.setItem('token', token);
-    setToken(token);
+    const address = response.data.introduceSession.addresses[0].address;
+    localStorage.setItem(
+      'userInfo',
+      JSON.stringify({ token: token, address: address })
+    );
+    setUserInfo({ token: token, address: address });
     return;
   } else {
     console.log('here');
-    const tokenIsValid = false;
+    // fetch emails, if fetch return error, tokenIsValid = false (session expired);
+
+    const tokenIsValid = true;
 
     if (!tokenIsValid) {
-      localStorage.removeItem('token');
-      return await fetchSession(setToken);
+      localStorage.removeItem('userInfo');
+      return await fetchSession(setUserInfo);
     }
 
     return;
