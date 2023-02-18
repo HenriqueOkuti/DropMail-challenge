@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { DefaultEmail } from '../contexts/mailContext';
 
-const CORS_API_URL = 'http://localhost:8080/'; //'https://cors-anywhere.herokuapp.com/';
+const CORS_API_URL = process.env.REACT_APP_CORS_ANYWHERE_URL; //'https://cors-anywhere.herokuapp.com/';
 const HASH = localStorage.getItem('hash')
   ? localStorage.getItem('hash')
   : generateRandomHash();
