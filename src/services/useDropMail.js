@@ -28,19 +28,24 @@ export async function verifySession(token) {
   return true;
 }
 
-export async function refreshMailList(token, setMail) {
+export async function refreshMailList(token, mail, setMail) {
   const URL = `${CORS_API_URL}${BASE_URL}?query=query { session(id: "${token}") { mails{ rawSize, fromAddr, toAddr, downloadUrl, text, headerSubject } } }`;
   const response = await axios.get(URL);
   const emails = response.data.data.session.mails;
+  if (
+    (mail.length === 1 && emails.length > 0) ||
+    mail.length - 1 === emails.length
+  ) {
+    //You've got new mail notification
 
-  const fullEmailList = [];
-  for (let i = 0; i < emails.length; i++) {
-    fullEmailList.push(emails[i]);
+    const fullEmailList = [];
+    for (let i = 0; i < emails.length; i++) {
+      fullEmailList.push(emails[i]);
+    }
+    fullEmailList.push(DefaultEmail);
+
+    setMail(fullEmailList);
   }
-  fullEmailList.push(DefaultEmail);
-
-  setMail(fullEmailList);
-  //return response.data;
 }
 
 function generateRandomHash() {

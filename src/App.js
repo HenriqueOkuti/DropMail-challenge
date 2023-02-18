@@ -8,6 +8,8 @@ import { QueryClientProvider, QueryClient } from 'react-query';
 import { SessionProvider } from './contexts/sessionContext';
 import { MailProvider } from './contexts/mailContext';
 import { BallTriangle } from 'react-loader-spinner';
+import { toast, ToastContainer } from 'react-toastify';
+import { NotificationProvider } from './contexts/notificationContext';
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -38,14 +40,19 @@ export default function App() {
   }
   return (
     <>
+      <ToastContainer
+        toastStyle={{ backgroundColor: '#dbdbdb', color: '#000000' }}
+      />
       <QueryClientProvider client={queryClient}>
         <SessionProvider>
           <MailProvider>
-            <Header />
-            <AllContentContainer>
-              <Info />
-              <MailContent />
-            </AllContentContainer>
+            <NotificationProvider>
+              <Header />
+              <AllContentContainer>
+                <Info />
+                <MailContent />
+              </AllContentContainer>
+            </NotificationProvider>
           </MailProvider>
         </SessionProvider>
       </QueryClientProvider>

@@ -64,6 +64,34 @@ export const EmailContainer = styled.div`
     align-items: center;
     margin: 0 0 5px 15px;
   }
+
+  position: relative;
+
+  -webkit-transition-duration: 0.6s; /* Safari */
+  transition-duration: 0.6s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+
+  :after {
+    content: '';
+    background: #dfdfdf;
+    display: block;
+    position: absolute;
+    padding-top: 200%;
+    padding-left: -200%;
+    margin-left: -35px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 1.2s;
+  }
+
+  :active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
 `;
 
 export const EmailSender = styled.div`
