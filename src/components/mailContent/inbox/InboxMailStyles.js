@@ -48,5 +48,7 @@ export const EmailBody = styled.div`
   p {
     white-space: break-spaces;
     margin: 10px;
+    max-width: 100%;
+    line-break: anywhere;
   }
 `;
