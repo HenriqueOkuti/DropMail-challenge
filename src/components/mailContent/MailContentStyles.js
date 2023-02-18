@@ -7,4 +7,5 @@ export const MailContentContainer = styled.div`
 
   width: 100%;
   min-height: 70%;
+  height: 100%;
 `;

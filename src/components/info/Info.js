@@ -55,8 +55,6 @@ export default function Info() {
     }
   }, [timer, update]);
 
-  //Change InputDivButtom to MUI equivalent
-
   return (
     <InfoDiv>
       <AuxDiv>
@@ -118,7 +116,6 @@ export default function Info() {
 
 function copyToClipboard(email) {
   navigator.clipboard.writeText(email);
-  //trigger notification HERE
   toast('Copied to clipboard!', {
     position: 'top-center',
     autoClose: 2000,
