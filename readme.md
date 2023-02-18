@@ -22,6 +22,7 @@
     <li>Obligatory 4</li>
     <ul>
         <li>Follow the mockup</li>
+        <li>Adapt desktop version for the mobile version</li>
     </ul>
     <li>Obligatory 5</li>
     <ul>
