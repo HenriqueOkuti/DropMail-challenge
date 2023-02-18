@@ -38,7 +38,9 @@ export const SideMenuHeader = styled.div`
 `;
 
 export const EmailsContainer = styled.div`
+  max-height: calc(100% - 45px);
   overflow-y: scroll;
+  border-bottom: 1px solid #dfdfdf;
 `;
 
 export const EmailContainer = styled.div`
@@ -51,9 +53,9 @@ export const EmailContainer = styled.div`
   font-size: 16px;
   line-height: 18px;
 
-  margin-top: 5px;
+  padding-top: 5px;
 
-  background-color: ${(props) => (props.colors ? '#f7f7f7' : 'none')};
+  background-color: ${(props) => (props.colors ? '#f7f7f7' : '#ffffff')};
 
   border-bottom: 1px solid #dfdfdf;
 

@@ -19,6 +19,15 @@ export async function createSession() {
   return response.data;
 }
 
+export async function verifySession(token) {
+  const URL = `${CORS_API_URL}${BASE_URL}?query=query { session(id: "${token}") { mails{ rawSize, fromAddr, toAddr, downloadUrl, text, headerSubject } } }`;
+  const response = await axios.get(URL);
+  if (response.data.errors) {
+    return false;
+  }
+  return true;
+}
+
 export async function refreshMailList(token, setMail) {
   const URL = `${CORS_API_URL}${BASE_URL}?query=query { session(id: "${token}") { mails{ rawSize, fromAddr, toAddr, downloadUrl, text, headerSubject } } }`;
   const response = await axios.get(URL);

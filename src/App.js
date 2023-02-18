@@ -1,12 +1,13 @@
-import { AllContentContainer } from './AppStyles';
+import { AllContentContainer, LoadingContainer } from './AppStyles';
 import Header from './components/header/Header';
 import Info from './components/info/Info';
 import MailContent from './components/mailContent/MailContent';
-import { createSession } from './services/useDropMail';
+import { createSession, verifySession } from './services/useDropMail';
 import { useEffect, useState } from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { SessionProvider } from './contexts/sessionContext';
 import { MailProvider } from './contexts/mailContext';
+import { BallTriangle } from 'react-loader-spinner';
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -19,7 +20,19 @@ export default function App() {
   if (!userInfo) {
     return (
       <>
-        <div>Loading App</div>
+        <LoadingContainer>
+          <div>Loading App</div>
+          <BallTriangle
+            height={150}
+            width={150}
+            radius={5}
+            color="#4fa94d"
+            ariaLabel="ball-triangle-loading"
+            wrapperClass={{}}
+            wrapperStyle=""
+            visible={true}
+          />
+        </LoadingContainer>
       </>
     );
   }
@@ -53,10 +66,7 @@ async function fetchSession(setUserInfo) {
     setUserInfo({ token: token, address: address });
     return;
   } else {
-    console.log('here');
-    // fetch emails, if fetch return error, tokenIsValid = false (session expired);
-
-    const tokenIsValid = true;
+    const tokenIsValid = await verifySession(token);
 
     if (!tokenIsValid) {
       localStorage.removeItem('userInfo');
