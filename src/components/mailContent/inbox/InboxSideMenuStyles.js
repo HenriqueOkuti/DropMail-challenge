@@ -4,11 +4,14 @@ export const SideMenuContainer = styled.div`
   background-color: #ffffff;
 
   min-height: 100%;
-  min-width: 20%;
+
   width: 33%;
   min-width: 250px;
 
   border-right: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+
+  border-radius: 0 0 0 5px;
 `;
 
 export const SideMenuHeader = styled.div`
@@ -17,7 +20,6 @@ export const SideMenuHeader = styled.div`
 
   height: 45px;
 
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;

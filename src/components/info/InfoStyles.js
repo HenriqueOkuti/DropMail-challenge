@@ -23,7 +23,6 @@ export const AuxDiv = styled.div`
 `;
 
 export const TempText = styled.div`
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 10px;
@@ -60,7 +59,6 @@ export const EmailField = styled.div`
 
   line-break: anywhere;
 
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
@@ -83,7 +81,6 @@ export const InputDivButtom = styled.div`
   border: 1px solid #dfdfdf;
   border-radius: 0px 5px 5px 0px;
 
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -105,7 +102,6 @@ export const RefreshContainer = styled.div`
   width: 360px;
   height: 45px;
 
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

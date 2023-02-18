@@ -15,7 +15,7 @@ export default function MailContent() {
     <>
       <MailContentContainer>
         <InboxSideMenu emails={emails} />
-        <InboxMail email={emails[selectedIndex]} />
+        {emails[0] ? <InboxMail email={emails[selectedIndex + 1]} /> : <></>}
       </MailContentContainer>
     </>
   );

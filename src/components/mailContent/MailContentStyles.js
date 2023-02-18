@@ -6,5 +6,5 @@ export const MailContentContainer = styled.div`
   background-color: #f7f7f7;
 
   width: 100%;
-  height: 100%;
+  min-height: 70%;
 `;

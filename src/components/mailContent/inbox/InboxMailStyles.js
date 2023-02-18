@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const InboxMailContainer = styled.div`
   height: 100%;
   width: 100%;
+
+  border-bottom: 1px solid #dfdfdf;
+  border-radius: 0 0 5px 0;
 `;
 
 export const BlankRow = styled.div`
@@ -20,7 +23,6 @@ export const EmailTitle = styled.div`
   display: flex;
   align-items: center;
 
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -39,4 +41,11 @@ export const EmailBody = styled.div`
   border-radius: 5px;
 
   margin: 0 5px 0 5px;
+
+  overflow-y: scroll;
+
+  p {
+    white-space: break-spaces;
+    margin: 10px;
+  }
 `;
