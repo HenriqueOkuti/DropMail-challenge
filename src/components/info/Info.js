@@ -18,20 +18,19 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
+import { createSession } from '../../services/useDropMail';
 
 export default function Info() {
   const [timer, setTimer] = useState(15);
 
   useEffect(() => {
     if (timer <= 0) {
-      //reset timer
-      //fetch new emails
-
+      //createSession();
       setTimer(15);
     } else {
       const interval = setInterval(() => {
         setTimer((timer) => timer - 1);
-      }, 1000);
+      }, 500);
 
       return () => clearInterval(interval);
     }

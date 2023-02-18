@@ -6,8 +6,6 @@ import {
 } from './InboxMailStyles';
 
 export default function InboxMail({ email }) {
-  console.log(email);
-
   const formattedText = email.text.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
   return (

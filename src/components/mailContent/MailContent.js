@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { SessionContext } from '../../contexts/sessionContext';
 import InboxMail from './inbox/InboxMail';
 import InboxSideMenu from './inbox/InboxSideMenu';
 import { MailContentContainer } from './MailContentStyles';
@@ -6,6 +7,9 @@ import { MailContentContainer } from './MailContentStyles';
 export default function MailContent() {
   const [emails, setEmails] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const something = useContext(SessionContext);
+  console.log(something);
 
   useEffect(() => {
     setEmails([...response.data.session.mails]);
