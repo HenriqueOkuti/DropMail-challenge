@@ -11,8 +11,6 @@ export const InfoDiv = styled.div`
   min-height: 200px;
 
   min-width: 100%;
-
-  //padding-bottom: 45px;
 `;
 
 export const AuxDiv = styled.div`
@@ -206,5 +204,3 @@ export const ManualRefreshDiv = styled.div`
     transition: 0s;
   }
 `;
-
-//

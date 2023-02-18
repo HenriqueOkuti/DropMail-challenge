@@ -15,6 +15,7 @@ export const BlankRow = styled.div`
 
   height: 45px;
   min-width: 100%;
+  font-size: 30px;
 
   border-bottom: 1px solid #dfdfdf;
 `;

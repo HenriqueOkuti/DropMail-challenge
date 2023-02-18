@@ -6,7 +6,6 @@ export const AllContentContainer = styled.div`
 
   height: 90vh;
   min-height: 650px;
-  //width: 99vw;
 
   border: 1px solid #dfdfdf;
   border-radius: 5px;
