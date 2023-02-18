@@ -22,6 +22,7 @@ import { SessionContext } from '../../contexts/sessionContext';
 import { refreshMailList } from '../../services/useDropMail';
 import { MailContext } from '../../contexts/mailContext';
 import { toast } from 'react-toastify';
+import { NotificationContext } from '../../contexts/notificationContext';
 
 export default function Info() {
   const [update, setUpdate] = useState(false);
@@ -29,13 +30,15 @@ export default function Info() {
   const sessionInfo = useContext(SessionContext);
   const currentEmail = JSON.parse(sessionInfo.session)?.address;
   const { mail, setMail } = useContext(MailContext);
+  const { notification } = useContext(NotificationContext);
 
   useEffect(() => {
     if (timer <= 0 || update) {
       refreshMailList(
         JSON.parse(sessionInfo.session).token,
         mail,
-        setMail
+        setMail,
+        notification
       ).then(() => {
         setTimer(15);
       });

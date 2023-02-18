@@ -28,15 +28,18 @@ export async function verifySession(token) {
   return true;
 }
 
-export async function refreshMailList(token, mail, setMail) {
+export async function refreshMailList(token, mail, setMail, notification) {
   const URL = `${CORS_API_URL}${BASE_URL}?query=query { session(id: "${token}") { mails{ rawSize, fromAddr, toAddr, downloadUrl, text, headerSubject } } }`;
   const response = await axios.get(URL);
   const emails = response.data.data.session.mails;
+
   if (
     (mail.length === 1 && emails.length > 0) ||
-    mail.length - 1 === emails.length
+    mail.length <= emails.length
   ) {
-    //You've got new mail notification
+    if (notification && document.hidden) {
+      const notification = new Notification('New mail');
+    }
 
     const fullEmailList = [];
     for (let i = 0; i < emails.length; i++) {

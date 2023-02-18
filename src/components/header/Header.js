@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   HeaderDiv,
   HeaderTitle,
@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { NotificationContext } from '../../contexts/notificationContext';
 
 const style = {
   position: 'absolute',
@@ -39,6 +39,9 @@ export default function Header() {
         ? 'denied'
         : 'default',
   });
+
+  const { notification, setNotification } = useContext(NotificationContext);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -94,7 +97,8 @@ export default function Header() {
                       askPermission(
                         notifications,
                         setNotifications,
-                        handleClose
+                        handleClose,
+                        setNotification
                       );
                     }}
                   >
@@ -110,14 +114,19 @@ export default function Header() {
   );
 }
 
-async function askPermission(notifications, setNotifications, handleClose) {
+async function askPermission(
+  notifications,
+  setNotifications,
+  handleClose,
+  setNotification
+) {
   await Notification.requestPermission().then((res) => {
-    console.log(res);
-
     setNotifications({
       picked: true,
       status: res,
     });
+
+    setNotification(res === 'granted' ? true : false);
 
     handleClose();
   });

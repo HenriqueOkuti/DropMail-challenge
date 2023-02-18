@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { MailContext } from '../../contexts/mailContext';
-import { SessionContext } from '../../contexts/sessionContext';
 import InboxMail from './inbox/InboxMail';
 import InboxSideMenu from './inbox/InboxSideMenu';
 import { MailContentContainer } from './MailContentStyles';
