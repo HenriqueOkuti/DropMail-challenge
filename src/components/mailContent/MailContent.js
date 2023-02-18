@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { MailContext } from '../../contexts/mailContext';
+import { SessionContext } from '../../contexts/sessionContext';
 import InboxMail from './inbox/InboxMail';
 import InboxSideMenu from './inbox/InboxSideMenu';
 import { MailContentContainer } from './MailContentStyles';
@@ -6,16 +8,23 @@ import { MailContentContainer } from './MailContentStyles';
 export default function MailContent() {
   const [emails, setEmails] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const { mail } = useContext(MailContext);
 
   useEffect(() => {
-    setEmails([...response.data.session.mails]);
-  }, []);
+    if (mail) {
+      setEmails([...mail]);
+    }
+  }, [mail]);
 
   return (
     <>
       <MailContentContainer>
-        <InboxSideMenu emails={emails} />
-        {emails[0] ? <InboxMail email={emails[selectedIndex + 1]} /> : <></>}
+        <InboxSideMenu
+          emails={emails}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        />
+        {emails[0] ? <InboxMail email={emails[selectedIndex]} /> : <></>}
       </MailContentContainer>
     </>
   );

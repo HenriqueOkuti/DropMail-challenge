@@ -53,6 +53,8 @@ export const EmailContainer = styled.div`
 
   margin-top: 5px;
 
+  background-color: ${(props) => (props.colors ? '#f7f7f7' : 'none')};
+
   border-bottom: 1px solid #dfdfdf;
 
   > div {

@@ -8,7 +8,13 @@ import {
   SideMenuHeader,
 } from './InboxSideMenuStyles';
 
-export default function InboxSideMenu({ emails }) {
+export default function InboxSideMenu({
+  emails,
+  selectedIndex,
+  setSelectedIndex,
+}) {
+  console.log(selectedIndex);
+
   return (
     <>
       <SideMenuContainer>
@@ -18,7 +24,13 @@ export default function InboxSideMenu({ emails }) {
         <EmailsContainer>
           {emails[0] ? (
             emails.map((email, index) => (
-              <RenderEmailOption key={index} email={email} />
+              <RenderEmailOption
+                key={index}
+                email={email}
+                index={index}
+                selected={selectedIndex === index}
+                setSelectedIndex={setSelectedIndex}
+              />
             ))
           ) : (
             <></>
@@ -29,11 +41,11 @@ export default function InboxSideMenu({ emails }) {
   );
 }
 
-function RenderEmailOption({ email }) {
+function RenderEmailOption({ email, index, selected, setSelectedIndex }) {
   const simplifiedText = email.text.slice(0, 50);
 
   return (
-    <EmailContainer onClick={() => console.log('selected e-mail')}>
+    <EmailContainer colors={selected} onClick={() => setSelectedIndex(index)}>
       <EmailSender>{email.fromAddr}</EmailSender>
       <EmailTitle>{email.headerSubject}</EmailTitle>
       <EmailSimplifiedText>{simplifiedText}</EmailSimplifiedText>
