@@ -38,7 +38,9 @@ export const SideMenuHeader = styled.div`
 `;
 
 export const EmailsContainer = styled.div`
+  max-height: calc(100% - 45px);
   overflow-y: scroll;
+  border-bottom: 1px solid #dfdfdf;
 `;
 
 export const EmailContainer = styled.div`
@@ -51,9 +53,9 @@ export const EmailContainer = styled.div`
   font-size: 16px;
   line-height: 18px;
 
-  margin-top: 5px;
+  padding-top: 5px;
 
-  background-color: ${(props) => (props.colors ? '#f7f7f7' : 'none')};
+  background-color: ${(props) => (props.colors ? '#f7f7f7' : '#ffffff')};
 
   border-bottom: 1px solid #dfdfdf;
 
@@ -61,6 +63,34 @@ export const EmailContainer = styled.div`
     display: flex;
     align-items: center;
     margin: 0 0 5px 15px;
+  }
+
+  position: relative;
+
+  -webkit-transition-duration: 0.6s; /* Safari */
+  transition-duration: 0.6s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+
+  :after {
+    content: '';
+    background: #dfdfdf;
+    display: block;
+    position: absolute;
+    padding-top: 200%;
+    padding-left: -200%;
+    margin-left: -35px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 1.2s;
+  }
+
+  :active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
   }
 `;
 

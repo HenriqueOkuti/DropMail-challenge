@@ -19,19 +19,36 @@ export async function createSession() {
   return response.data;
 }
 
-export async function refreshMailList(token, setMail) {
+export async function verifySession(token) {
+  const URL = `${CORS_API_URL}${BASE_URL}?query=query { session(id: "${token}") { mails{ rawSize, fromAddr, toAddr, downloadUrl, text, headerSubject } } }`;
+  const response = await axios.get(URL);
+  if (response.data.errors) {
+    return false;
+  }
+  return true;
+}
+
+export async function refreshMailList(token, mail, setMail, notification) {
   const URL = `${CORS_API_URL}${BASE_URL}?query=query { session(id: "${token}") { mails{ rawSize, fromAddr, toAddr, downloadUrl, text, headerSubject } } }`;
   const response = await axios.get(URL);
   const emails = response.data.data.session.mails;
 
-  const fullEmailList = [];
-  for (let i = 0; i < emails.length; i++) {
-    fullEmailList.push(emails[i]);
-  }
-  fullEmailList.push(DefaultEmail);
+  if (
+    (mail.length === 1 && emails.length > 0) ||
+    mail.length <= emails.length
+  ) {
+    if (notification && document.hidden) {
+      const notification = new Notification('New mail');
+    }
 
-  setMail(fullEmailList);
-  //return response.data;
+    const fullEmailList = [];
+    for (let i = 0; i < emails.length; i++) {
+      fullEmailList.push(emails[i]);
+    }
+    fullEmailList.push(DefaultEmail);
+
+    setMail(fullEmailList);
+  }
 }
 
 function generateRandomHash() {

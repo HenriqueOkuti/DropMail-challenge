@@ -21,22 +21,27 @@ import { useContext, useEffect, useState } from 'react';
 import { SessionContext } from '../../contexts/sessionContext';
 import { refreshMailList } from '../../services/useDropMail';
 import { MailContext } from '../../contexts/mailContext';
+import { toast } from 'react-toastify';
+import { NotificationContext } from '../../contexts/notificationContext';
 
 export default function Info() {
   const [update, setUpdate] = useState(false);
   const [timer, setTimer] = useState(0);
   const sessionInfo = useContext(SessionContext);
-  const currentEmail = JSON.parse(sessionInfo.session).address;
-  const { setMail } = useContext(MailContext);
+  const currentEmail = JSON.parse(sessionInfo.session)?.address;
+  const { mail, setMail } = useContext(MailContext);
+  const { notification } = useContext(NotificationContext);
 
   useEffect(() => {
     if (timer <= 0 || update) {
-      console.log('sending request');
-      refreshMailList(JSON.parse(sessionInfo.session).token, setMail).then(
-        () => {
-          setTimer(15);
-        }
-      );
+      refreshMailList(
+        JSON.parse(sessionInfo.session).token,
+        mail,
+        setMail,
+        notification
+      ).then(() => {
+        setTimer(15);
+      });
 
       if (update) {
         setUpdate(!update);
@@ -113,6 +118,15 @@ export default function Info() {
 
 function copyToClipboard(email) {
   navigator.clipboard.writeText(email);
-
   //trigger notification HERE
+  toast('Copied to clipboard!', {
+    position: 'top-center',
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'dark',
+  });
 }

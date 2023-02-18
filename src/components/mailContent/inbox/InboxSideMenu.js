@@ -13,8 +13,6 @@ export default function InboxSideMenu({
   selectedIndex,
   setSelectedIndex,
 }) {
-  console.log(selectedIndex);
-
   return (
     <>
       <SideMenuContainer>
