@@ -15,14 +15,13 @@ const GET_EMAILS = `${BASE_URL}?query { session(id: "U2Vzc2lvbjrYLjqfbuxK2rTNEZ3
 export async function createSession() {
   const URL = `${CORS_API_URL}${NEW_SESSION_URL}`;
   const response = await axios.get(URL);
-  console.log(response.data);
   return response.data;
 }
 
 export async function verifySession(token) {
   const URL = `${CORS_API_URL}${BASE_URL}?query=query { session(id: "${token}") { mails{ rawSize, fromAddr, toAddr, downloadUrl, text, headerSubject } } }`;
   const response = await axios.get(URL);
-  if (response.data.errors) {
+  if (response.data.errors || !response.data.data.session.mails) {
     return false;
   }
   return true;
