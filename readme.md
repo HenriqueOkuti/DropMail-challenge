@@ -32,7 +32,19 @@ Neste caso você pode acessar a aplicação em <p>`http://localhost:<PORT>/`</p>
 
 ### Node
 
-Primeiro é necessário baixar as dependências
+Primeiro, popule um arquivo .env seguindo o modelo do arquivo .env.example, note que a variável `REACT_APP_CORS_ANYWHERE_URL` pode ser populada com o link padrão do cors-anywhere
+
+```
+REACT_APP_CORS_ANYWHERE_URL=https://cors-anywhere.herokuapp.com/
+```
+
+Ou você pode utilizar o meu fork do cors-anywhere
+
+```
+REACT_APP_CORS_ANYWHERE_URL=https://web-production-c18b.up.railway.app/
+```
+
+Também é necessário baixar as dependências
 
 ```
 npm i
