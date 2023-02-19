@@ -21,7 +21,7 @@ export async function createSession() {
 export async function verifySession(token) {
   const URL = `${CORS_API_URL}${BASE_URL}?query=query { session(id: "${token}") { mails{ rawSize, fromAddr, toAddr, downloadUrl, text, headerSubject } } }`;
   const response = await axios.get(URL);
-  if (response.data.errors || !response.data.data.session.mails) {
+  if (response.data.errors || !response.data.data.session) {
     return false;
   }
   return true;

@@ -14,12 +14,13 @@ import { NotificationProvider } from './contexts/notificationContext';
 export default function App() {
   const queryClient = new QueryClient();
   const [userInfo, setUserInfo] = useState(localStorage.getItem('userInfo'));
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchSession(setUserInfo);
+    fetchSession(setUserInfo, setLoading);
   }, []);
 
-  if (!userInfo) {
+  if (!userInfo || loading) {
     return (
       <>
         <LoadingContainer>
@@ -60,7 +61,7 @@ export default function App() {
   );
 }
 
-async function fetchSession(setUserInfo) {
+async function fetchSession(setUserInfo, setLoading) {
   let token = JSON.parse(localStorage.getItem('userInfo'))?.token;
   if (!token) {
     const response = await createSession();
@@ -71,6 +72,7 @@ async function fetchSession(setUserInfo) {
       JSON.stringify({ token: token, address: address })
     );
     setUserInfo({ token: token, address: address });
+    setLoading(false);
     return;
   } else {
     const tokenIsValid = await verifySession(token);
@@ -80,6 +82,7 @@ async function fetchSession(setUserInfo) {
       return await fetchSession(setUserInfo);
     }
 
+    setLoading(false);
     return;
   }
 }
